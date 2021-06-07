@@ -9,11 +9,17 @@ import displayio
 import terminalio
 from adafruit_display_text import label
 import adafruit_displayio_sh1106
+
 displayio.release_displays()
 
 spi = busio.SPI(board.SCK, board.MOSI)
-display_bus = displayio.FourWire(spi, command=board.OLED_DC, chip_select=board.OLED_CS,
-                                 reset=board.OLED_RESET, baudrate=1000000)
+display_bus = displayio.FourWire(
+    spi,
+    command=board.OLED_DC,
+    chip_select=board.OLED_CS,
+    reset=board.OLED_RESET,
+    baudrate=1000000,
+)
 
 WIDTH = 128
 HEIGHT = 64

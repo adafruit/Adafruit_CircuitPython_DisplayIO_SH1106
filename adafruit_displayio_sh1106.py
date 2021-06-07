@@ -61,11 +61,7 @@ class SH1106(displayio.Display):
     :param int rotation: The rotation of the display. 0, 90, 180 or 270.
     """
 
-    def __init__(
-        self,
-        bus,
-        **kwargs
-    ):
+    def __init__(self, bus, **kwargs):
         init_sequence = bytearray(_INIT_SEQUENCE)
         super().__init__(
             bus,
