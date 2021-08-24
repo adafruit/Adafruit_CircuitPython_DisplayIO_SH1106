@@ -55,6 +55,7 @@ _INIT_SEQUENCE = (
 class SH1106(displayio.Display):
     """
     SH1106 driver for use with DisplayIO
+
     :param bus: The bus that the display is connected to.
     :param int width: The width of the display. Maximum of 132
     :param int height: The height of the display. Maximum of 64
@@ -71,7 +72,6 @@ class SH1106(displayio.Display):
             grayscale=True,
             pixels_in_byte_share_row=False,  # in vertical (column) mode
             data_as_commands=True,  # every byte will have a command byte preceeding
-            set_vertical_scroll=0xD3,  # TBD -- not sure about this one!
             brightness_command=0x81,
             single_byte_bounds=True,
             # for sh1107 use column and page addressing.
@@ -86,19 +86,21 @@ class SH1106(displayio.Display):
     def is_awake(self):
         """
         The power state of the display. (read-only)
-        True if the display is active, False if in sleep mode.
+
+        `True` if the display is active, `False` if in sleep mode.
         """
         return self._is_awake
 
     def sleep(self):
         """
-        Put display into sleep mode
-        The display uses < 5uA in sleep mode
+        Put display into sleep mode. The display uses < 5uA in sleep mode.
+
         Sleep mode does the following:
-        1) Stops the oscillator and DC-DC circuits
-        2) Stops the OLED drive
-        3) Remembers display data and operation mode active prior to sleeping
-        4) The MP can access (update) the built-in display RAM
+
+            1) Stops the oscillator and DC-DC circuits
+            2) Stops the OLED drive
+            3) Remembers display data and operation mode active prior to sleeping
+            4) The MP can access (update) the built-in display RAM
         """
         if self._is_awake:
             self.bus.send(int(0xAE), "")  # 0xAE = display off, sleep mode
