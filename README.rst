@@ -3,7 +3,7 @@ Introduction
 
 
 .. image:: https://readthedocs.org/projects/adafruit-circuitpython-displayio_sh1106/badge/?version=latest
-    :target: https://circuitpython.readthedocs.io/projects/displayio_sh1106/en/latest/
+    :target: https://docs.circuitpython.org/projects/displayio_sh1106/en/latest/
     :alt: Documentation Status
 
 
@@ -123,7 +123,7 @@ Usage Example
 Documentation
 =============
 
-API documentation for this library can be found on `Read the Docs <https://circuitpython.readthedocs.io/projects/displayio_sh1106/en/latest/>`_.
+API documentation for this library can be found on `Read the Docs <https://docs.circuitpython.org/projects/displayio_sh1106/en/latest/>`_.
 
 Contributing
 ============
