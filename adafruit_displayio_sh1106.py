@@ -62,7 +62,7 @@ class SH1106(displayio.Display):
     :param int rotation: The rotation of the display. 0, 90, 180 or 270.
     """
 
-    def __init__(self, bus, **kwargs):
+    def __init__(self, bus: displayio.Fourwire, **kwargs) -> None:
         init_sequence = bytearray(_INIT_SEQUENCE)
         super().__init__(
             bus,
@@ -83,7 +83,7 @@ class SH1106(displayio.Display):
         self._is_awake = True  # Display starts in active state (_INIT_SEQUENCE)
 
     @property
-    def is_awake(self):
+    def is_awake(self) -> bool:
         """
         The power state of the display. (read-only)
 
@@ -91,7 +91,7 @@ class SH1106(displayio.Display):
         """
         return self._is_awake
 
-    def sleep(self):
+    def sleep(self) -> None:
         """
         Put display into sleep mode. The display uses < 5uA in sleep mode.
 
@@ -106,7 +106,7 @@ class SH1106(displayio.Display):
             self.bus.send(0xAE, b"")  # 0xAE = display off, sleep mode
             self._is_awake = False
 
-    def wake(self):
+    def wake(self) -> None:
         """
         Wake display from sleep mode
         """
