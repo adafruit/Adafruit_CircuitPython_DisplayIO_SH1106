@@ -6,6 +6,7 @@
 import board
 import busio
 import displayio
+import fourwire
 import terminalio
 from adafruit_display_text import label
 import adafruit_displayio_sh1106
@@ -13,7 +14,7 @@ import adafruit_displayio_sh1106
 displayio.release_displays()
 
 spi = busio.SPI(board.SCK, board.MOSI)
-display_bus = displayio.FourWire(
+display_bus = fourwire.FourWire(
     spi,
     command=board.OLED_DC,
     chip_select=board.OLED_CS,
@@ -28,7 +29,7 @@ display = adafruit_displayio_sh1106.SH1106(display_bus, width=WIDTH, height=HEIG
 
 # Make the display context
 splash = displayio.Group()
-display.show(splash)
+display.root_group = splash
 
 color_bitmap = displayio.Bitmap(WIDTH, HEIGHT, 1)
 color_palette = displayio.Palette(1)
