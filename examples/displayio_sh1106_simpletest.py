@@ -6,15 +6,21 @@
 import board
 import busio
 import displayio
-import fourwire
 import terminalio
 from adafruit_display_text import label
 import adafruit_displayio_sh1106
 
+# Compatibility with both CircuitPython 8.x.x and 9.x.x.
+# Remove after 8.x.x is no longer a supported release.
+try:
+    from fourwire import FourWire
+except ImportError:
+    from displayio import FourWire
+
 displayio.release_displays()
 
 spi = busio.SPI(board.SCK, board.MOSI)
-display_bus = fourwire.FourWire(
+display_bus = FourWire(
     spi,
     command=board.OLED_DC,
     chip_select=board.OLED_CS,

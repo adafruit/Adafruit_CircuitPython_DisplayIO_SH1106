@@ -23,8 +23,13 @@ Implementation Notes
 
 """
 
-# imports
-import displayio
+# Support both 8.x.x and 9.x.x. Change when 8.x.x is discontinued as a stable release.
+try:
+    from fourwire import FourWire
+    from busdisplay import BusDisplay
+except ImportError:
+    from displayio import FourWire
+    from displayio import Display as BusDisplay
 
 __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_SH1106.git"
@@ -52,9 +57,9 @@ _INIT_SEQUENCE = (
 )
 
 
-class SH1106(displayio.Display):
+class SH1106(BusDisplay):
     """
-    SH1106 driver for use with DisplayIO
+    SH1106 driver for use with displayio
 
     :param bus: The bus that the display is connected to.
     :param int width: The width of the display. Maximum of 132
@@ -62,7 +67,7 @@ class SH1106(displayio.Display):
     :param int rotation: The rotation of the display. 0, 90, 180 or 270.
     """
 
-    def __init__(self, bus: displayio.FourWire, **kwargs) -> None:
+    def __init__(self, bus: FourWire, **kwargs) -> None:
         init_sequence = bytearray(_INIT_SEQUENCE)
         super().__init__(
             bus,
