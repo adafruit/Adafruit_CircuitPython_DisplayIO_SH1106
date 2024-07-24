@@ -25,10 +25,17 @@ Implementation Notes
 
 # Support both 8.x.x and 9.x.x. Change when 8.x.x is discontinued as a stable release.
 try:
+    from typing import Union
+except ImportError:
+    pass
+
+try:
     from fourwire import FourWire
     from busdisplay import BusDisplay
+    from i2cdisplaybus import I2CDisplayBus
 except ImportError:
     from displayio import FourWire
+    from displayio import I2CDisplay as I2CDisplayBus
     from displayio import Display as BusDisplay
 
 __version__ = "0.0.0+auto.0"
@@ -67,7 +74,7 @@ class SH1106(BusDisplay):
     :param int rotation: The rotation of the display. 0, 90, 180 or 270.
     """
 
-    def __init__(self, bus: FourWire, **kwargs) -> None:
+    def __init__(self, bus: Union[FourWire, I2CDisplayBus], **kwargs) -> None:
         init_sequence = bytearray(_INIT_SEQUENCE)
         super().__init__(
             bus,
