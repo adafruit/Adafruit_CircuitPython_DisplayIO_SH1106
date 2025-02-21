@@ -29,14 +29,9 @@ try:
 except ImportError:
     pass
 
-try:
-    from fourwire import FourWire
-    from busdisplay import BusDisplay
-    from i2cdisplaybus import I2CDisplayBus
-except ImportError:
-    from displayio import FourWire
-    from displayio import I2CDisplay as I2CDisplayBus
-    from displayio import Display as BusDisplay
+from busdisplay import BusDisplay
+from fourwire import FourWire
+from i2cdisplaybus import I2CDisplayBus
 
 __version__ = "0.0.0+auto.0"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_DisplayIO_SH1106.git"
@@ -56,7 +51,7 @@ _INIT_SEQUENCE = (
     b"\x81\x01\xff"  # contrast setting = 0xff
     b"\xd9\x01\x1f"  # pre-charge/dis-charge period mode: 2 DCLKs/2 DCLKs (POR)
     b"\xdb\x01\x40"  # VCOM deselect level = 0.770 (POR)
-    b"\x20\x01\x20"  #
+    b"\x20\x01\x20"
     b"\x33\x00"  # turn on VPP to 9V
     b"\xa6\x00"  # normal (not reversed) display
     b"\xa4\x00"  # entire display off, retain RAM, normal status (POR)

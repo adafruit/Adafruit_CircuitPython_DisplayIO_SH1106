@@ -8,14 +8,9 @@ import busio
 import displayio
 import terminalio
 from adafruit_display_text import label
-import adafruit_displayio_sh1106
+from fourwire import FourWire
 
-# Compatibility with both CircuitPython 8.x.x and 9.x.x.
-# Remove after 8.x.x is no longer a supported release.
-try:
-    from fourwire import FourWire
-except ImportError:
-    from displayio import FourWire
+import adafruit_displayio_sh1106
 
 displayio.release_displays()
 
@@ -48,16 +43,12 @@ splash.append(bg_sprite)
 inner_bitmap = displayio.Bitmap(WIDTH - BORDER * 2, HEIGHT - BORDER * 2, 1)
 inner_palette = displayio.Palette(1)
 inner_palette[0] = 0x000000  # Black
-inner_sprite = displayio.TileGrid(
-    inner_bitmap, pixel_shader=inner_palette, x=BORDER, y=BORDER
-)
+inner_sprite = displayio.TileGrid(inner_bitmap, pixel_shader=inner_palette, x=BORDER, y=BORDER)
 splash.append(inner_sprite)
 
 # Draw a label
 text = "Hello World!"
-text_area = label.Label(
-    terminalio.FONT, text=text, color=0xFFFFFF, x=28, y=HEIGHT // 2 - 1
-)
+text_area = label.Label(terminalio.FONT, text=text, color=0xFFFFFF, x=28, y=HEIGHT // 2 - 1)
 splash.append(text_area)
 
 while True:
